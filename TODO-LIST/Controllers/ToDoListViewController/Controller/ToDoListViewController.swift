@@ -2,7 +2,7 @@
 //  ToDoListViewController.swift
 //  TODO-LIST
 //
-//  Created by Raghavendra Shedole on 18/02/18.
+//  Created by Raghavendra Shedole on 20/02/18.
 //  Copyright © 2018 Raghavendra Shedole. All rights reserved.
 //
 
@@ -23,8 +23,8 @@ class ToDoListViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        todoTableView.rowHeight = 50
-        todoTableView.estimatedRowHeight = UITableViewAutomaticDimension
+        todoTableView.rowHeight = UITableViewAutomaticDimension
+        todoTableView.estimatedRowHeight = 80
         fetchData()
     }
    
@@ -49,20 +49,17 @@ class ToDoListViewController: UIViewController {
         
         if selectedIndex >= 0 {
             deleteData(atIndex: selectedIndex)
-            
+            deleteRow(atIndex: selectedIndex)
             selectedIndex = -1
         }
         
-        let  noteClass = NoteClass(context:PesistentStore.context)
-        noteClass.note_title = noteDetailsVC.noteTitle
-        noteClass.date = noteDetailsVC.date as NSDate
-        noteClass.priority = noteDetailsVC.priority.rawValue
-                
+        let note = noteDetailsVC.note
+        
         PesistentStore.saveContext()
         if self.notes.count == 0 {
-            self.notes.append(noteClass)
+            self.notes.append(note!)
         }else {
-         self.notes.insert(noteClass, at: 0)
+            self.notes.insert(note!, at: 0)
         }
         
         //waiting for 1.0 second to insert the row
@@ -82,9 +79,10 @@ class ToDoListViewController: UIViewController {
         if let sender = sender as? Bool {
             if sender == true {
                 let notesdetailsVC = segue.destination as! NoteDetailsViewController
-                notesdetailsVC.noteTitle = notes[selectedIndex].note_title!
-                notesdetailsVC.date = notes[selectedIndex].date! as Date
-                notesdetailsVC.priority = notes[selectedIndex].priority == NotePriority.High.rawValue ? .High : .Low
+                notesdetailsVC.note = notes[selectedIndex]
+//                notesdetailsVC.noteTitle = notes[selectedIndex].note_title!
+//                notesdetailsVC.date = notes[selectedIndex].date! as Date
+//                notesdetailsVC.priority = notes[selectedIndex].priority == NotePriority.High.rawValue ? .High : .Low
             }
         }
     }
@@ -138,7 +136,7 @@ extension ToDoListViewController:UITableViewDataSource, UITableViewDelegate{
             self.performSegue(withIdentifier: String(describing:NoteDetailsViewController.self), sender: true)
             
         }
-        editAction.backgroundColor = .blue
+        editAction.backgroundColor = UIColor.colorWithHex(color: "78D3FA")
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
             //TODO: Delete the row at indexPath here
@@ -210,7 +208,6 @@ extension ToDoListViewController {
         //Fetch request
         PesistentStore.context.delete(notes[index])
         PesistentStore.saveContext()
-        //        context.delete(notes[index])
         notes.remove(at: index)
     }
     
@@ -237,21 +234,28 @@ extension ToDoListViewController {
         
         let fetchRequest:NSFetchRequest<NoteClass> = NoteClass.fetchRequest()
         var sortDescriptor:NSSortDescriptor
-        
+        var key = "" //Key to be sort
         switch sender {
         case headerCell.noteTitleButton:
-            
-            sortDescriptor = NSSortDescriptor(key: "note_title", ascending: true)
+            key = "note_title"
+            headerCell.dueDateButton.isSelected = false
+            headerCell.priorityButton.isSelected = false
             
         case headerCell.priorityButton:
-            sortDescriptor = NSSortDescriptor(key: "priority", ascending: false)
+            key = "priority"
+            headerCell.dueDateButton.isSelected = false
+            headerCell.noteTitleButton.isSelected = false
 
         case headerCell.dueDateButton:
-            sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+            key = "date"
+            headerCell.noteTitleButton.isSelected = false
+            headerCell.priorityButton.isSelected = false
 
         default:
-             sortDescriptor = NSSortDescriptor(key: "note_title", ascending: ascending)
+           return
         }
+        sender.isSelected = sender.isSelected ? false : true
+        sortDescriptor = NSSortDescriptor(key: key, ascending: sender.isSelected)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         do {

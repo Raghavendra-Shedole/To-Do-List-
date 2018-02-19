@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2009E8B203B570900BB729E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2009E8A203B570900BB729E /* UIColor.swift */; };
 		A22D12172039F6170035B600 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22D12162039F6170035B600 /* AppDelegate.swift */; };
 		A22D12192039F6170035B600 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22D12182039F6170035B600 /* ViewController.swift */; };
 		A22D121C2039F6170035B600 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22D121A2039F6170035B600 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A2009E8A203B570900BB729E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A22D12132039F6170035B600 /* TODO-LIST.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TODO-LIST.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22D12162039F6170035B600 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A22D12182039F6170035B600 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A2155B0A203AA11300E204D9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A22D12472039FD290035B600 /* ToDoListViewController */,
+				A22D124D203A06630035B600 /* NoteDetailsview */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		A22D120A2039F6170035B600 = {
 			isa = PBXGroup;
 			children = (
@@ -76,10 +87,9 @@
 		A22D12152039F6170035B600 /* TODO-LIST */ = {
 			isa = PBXGroup;
 			children = (
+				A2155B0A203AA11300E204D9 /* Controllers */,
 				A22D124A203A03E90035B600 /* UtilityClasses */,
 				A22D122B2039F6D50035B600 /* Core Data */,
-				A22D12472039FD290035B600 /* ToDoListViewController */,
-				A22D124D203A06630035B600 /* NoteDetailsview */,
 				A22D12162039F6170035B600 /* AppDelegate.swift */,
 				A22D12182039F6170035B600 /* ViewController.swift */,
 				A22D121A2039F6170035B600 /* Main.storyboard */,
@@ -113,6 +123,7 @@
 		A22D124A203A03E90035B600 /* UtilityClasses */ = {
 			isa = PBXGroup;
 			children = (
+				A2009E8A203B570900BB729E /* UIColor.swift */,
 				A22D1258203A1F860035B600 /* CustomDate.swift */,
 				A22D124B203A04520035B600 /* CustomView.swift */,
 				A22D1250203A10E60035B600 /* UIViewController.swift */,
@@ -218,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A22D12422039FCB90035B600 /* NoteClass+CoreDataProperties.swift in Sources */,
+				A2009E8B203B570900BB729E /* UIColor.swift in Sources */,
 				A22D124C203A04520035B600 /* CustomView.swift in Sources */,
 				A22D124F203A067F0035B600 /* NoteDetailsViewController.swift in Sources */,
 				A22D1257203A1E540035B600 /* NoteCell.swift in Sources */,

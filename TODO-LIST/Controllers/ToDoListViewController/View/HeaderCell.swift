@@ -1,18 +1,18 @@
 //
-//  NoteCell.swift
+//  HeaderCell.swift
 //  TODO-LIST
 //
-//  Created by Raghavendra Shedole on 19/02/18.
+//  Created by Raghavendra Shedole on 20/02/18.
 //  Copyright © 2018 Raghavendra Shedole. All rights reserved.
 //
 
 import UIKit
 
-class NoteCell: UITableViewCell {
+class HeaderCell: UITableViewCell {
 
-    @IBOutlet weak var noteTitle: UILabel!
-    @IBOutlet weak var priority: UILabel!
-    @IBOutlet weak var datelable: UILabel!
+    @IBOutlet weak var priorityButton: UIButton!
+    @IBOutlet weak var dueDateButton: UIButton!
+    @IBOutlet weak var noteTitleButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
