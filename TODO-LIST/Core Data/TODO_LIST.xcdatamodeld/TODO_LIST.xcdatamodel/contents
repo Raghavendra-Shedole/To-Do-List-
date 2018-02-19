@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Note" representedClassName="NoteClass" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="note_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="items" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NoteItem" syncable="YES"/>
+    </entity>
+    <entity name="NoteItem" representedClassName="NoteItem" syncable="YES" codeGenerationType="class"/>
+    <elements>
+        <element name="Note" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="NoteItem" positionX="-54" positionY="18" width="128" height="45"/>
+    </elements>
+</model>
