@@ -11,6 +11,8 @@ import UIKit
 class HeaderCell: UITableViewCell {
 
     @IBOutlet weak var priorityButton: UIButton!
+    @IBOutlet weak var dueDateButton: UIButton!
+    @IBOutlet weak var noteTitleButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

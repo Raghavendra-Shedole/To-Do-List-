@@ -48,6 +48,11 @@ class NoteDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+  
+}
+
+// MARK: - Button Methods
+extension NoteDetailsViewController {
     @IBAction func doneButtonAction(_ sender: UIButton) {
         if titleTextField.text?.count == 0 {
             self.showAlert(withMessage: "Please enter the \"Note Title\".")
@@ -64,6 +69,9 @@ class NoteDetailsViewController: UIViewController {
         dismiss(animated: false, completion: nil)
     }
     
+    /// Priority buttons Action method (common for both the buttons)
+    ///
+    /// - Parameter sender: High priority or Low Priority
     @IBAction func priorityButtonAction(_ sender: UIButton) {
         
         if sender == lowPriorityButton {
@@ -76,7 +84,12 @@ class NoteDetailsViewController: UIViewController {
             self.highPriorityButton.backgroundColor = .red
             priority = .High
         }
-        
     }
-    
+}
+
+extension NoteDetailsViewController:UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
 }

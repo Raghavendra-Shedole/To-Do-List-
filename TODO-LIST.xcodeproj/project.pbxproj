@@ -76,10 +76,10 @@
 		A22D12152039F6170035B600 /* TODO-LIST */ = {
 			isa = PBXGroup;
 			children = (
-				A22D124D203A06630035B600 /* NoteDetailsview */,
-				A22D124A203A03E90035B600 /* CustomClasses */,
-				A22D12472039FD290035B600 /* ToDoListViewController */,
+				A22D124A203A03E90035B600 /* UtilityClasses */,
 				A22D122B2039F6D50035B600 /* Core Data */,
+				A22D12472039FD290035B600 /* ToDoListViewController */,
+				A22D124D203A06630035B600 /* NoteDetailsview */,
 				A22D12162039F6170035B600 /* AppDelegate.swift */,
 				A22D12182039F6170035B600 /* ViewController.swift */,
 				A22D121A2039F6170035B600 /* Main.storyboard */,
@@ -110,14 +110,14 @@
 			path = ToDoListViewController;
 			sourceTree = "<group>";
 		};
-		A22D124A203A03E90035B600 /* CustomClasses */ = {
+		A22D124A203A03E90035B600 /* UtilityClasses */ = {
 			isa = PBXGroup;
 			children = (
 				A22D1258203A1F860035B600 /* CustomDate.swift */,
 				A22D124B203A04520035B600 /* CustomView.swift */,
 				A22D1250203A10E60035B600 /* UIViewController.swift */,
 			);
-			path = CustomClasses;
+			path = UtilityClasses;
 			sourceTree = "<group>";
 		};
 		A22D124D203A06630035B600 /* NoteDetailsview */ = {
