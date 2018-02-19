@@ -20,9 +20,11 @@ class NoteDetailsViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var lowPriorityButton: UIButton!
     @IBOutlet weak var highPriorityButton: UIButton!
-    
     @IBOutlet weak var backgroundView: CustomView!
-    var note:NoteClass?
+    
+    var noteTitle = ""
+    var date = Date()
+    var priority:NotePriority = .None
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,10 +65,10 @@ class NoteDetailsViewController: UIViewController {
     
     /// Setting data to edit
     func setData(){
-        if let note = note  {
-            self.titleTextField.text = note.note_title
-            self.datePicker.date = note.date! as Date
-            if note.priority == NotePriority.High.rawValue {
+        if noteTitle.count > 0 {
+            self.titleTextField.text = noteTitle
+            self.datePicker.date = date
+            if self.priority == .High {
                 priorityButtonAction(highPriorityButton)
             }else {
                 priorityButtonAction(lowPriorityButton)
@@ -87,12 +89,11 @@ extension NoteDetailsViewController {
     @IBAction func doneButtonAction(_ sender: UIButton) {
         if titleTextField.text?.count == 0 {
             self.showAlert(withMessage: "Please enter the \"Note Title\".")
-        }else if !highPriorityButton.isSelected && !lowPriorityButton.isSelected {
+        }else if priority == .None {
             self.showAlert(withMessage: "Please set the priority.")
         }else {
-            note?.note_title = titleTextField.text
-            note?.priority = highPriorityButton.isSelected ? NotePriority.High.rawValue : NotePriority.Low.rawValue
-            note?.date = datePicker.date as NSDate
+            date = self.datePicker.date
+            noteTitle = titleTextField.text!
             performSegue(withIdentifier: String(describing:ToDoListViewController.self), sender: nil)
         }
     }
@@ -107,12 +108,18 @@ extension NoteDetailsViewController {
     @IBAction func priorityButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         if sender == lowPriorityButton {
+            self.lowPriorityButton.isSelected = true
+            self.highPriorityButton.isSelected = false
             self.lowPriorityButton.backgroundColor = .red
             self.highPriorityButton.backgroundColor = .white
+            priority = .Low
             
         }else {
+            self.lowPriorityButton.isSelected = false
+            self.highPriorityButton.isSelected = true
             self.lowPriorityButton.backgroundColor = .white
             self.highPriorityButton.backgroundColor = .red
+            priority = .High
         }
     }
 }

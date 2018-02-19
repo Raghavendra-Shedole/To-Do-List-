@@ -53,13 +53,16 @@ class ToDoListViewController: UIViewController {
             selectedIndex = -1
         }
         
-        let note = noteDetailsVC.note
+        let  note = NoteClass(context:PesistentStore.context)
+        note.note_title = noteDetailsVC.noteTitle
+        note.date = noteDetailsVC.date as NSDate
+        note.priority = noteDetailsVC.priority.rawValue
         
         PesistentStore.saveContext()
         if self.notes.count == 0 {
-            self.notes.append(note!)
+            self.notes.append(note)
         }else {
-            self.notes.insert(note!, at: 0)
+            self.notes.insert(note, at: 0)
         }
         
         //waiting for 1.0 second to insert the row
@@ -79,10 +82,9 @@ class ToDoListViewController: UIViewController {
         if let sender = sender as? Bool {
             if sender == true {
                 let notesdetailsVC = segue.destination as! NoteDetailsViewController
-                notesdetailsVC.note = notes[selectedIndex]
-//                notesdetailsVC.noteTitle = notes[selectedIndex].note_title!
-//                notesdetailsVC.date = notes[selectedIndex].date! as Date
-//                notesdetailsVC.priority = notes[selectedIndex].priority == NotePriority.High.rawValue ? .High : .Low
+                notesdetailsVC.noteTitle = notes[selectedIndex].note_title!
+                notesdetailsVC.date = notes[selectedIndex].date! as Date
+                notesdetailsVC.priority = notes[selectedIndex].priority == NotePriority.High.rawValue ? .High : .Low
             }
         }
     }
