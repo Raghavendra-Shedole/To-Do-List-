@@ -27,6 +27,7 @@ class ToDoListViewController: UIViewController {
         todoTableView.estimatedRowHeight = 80
         fetchData()
     }
+    
    
     /// Right navigation button method
     ///
@@ -46,6 +47,7 @@ class ToDoListViewController: UIViewController {
     @IBAction func unwindSegue(segue:UIStoryboardSegue) {
         
         let noteDetailsVC = segue.source as! NoteDetailsViewController
+        
         
         if selectedIndex >= 0 {
             deleteData(atIndex: selectedIndex)
@@ -79,6 +81,7 @@ class ToDoListViewController: UIViewController {
     ///   - sender: boolean value if true means editing the existing entry else adding new one
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+         reloadData()
         if let sender = sender as? Bool {
             if sender == true {
                 let notesdetailsVC = segue.destination as! NoteDetailsViewController
@@ -131,8 +134,11 @@ extension ToDoListViewController:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
+        self.view.endEditing(true)
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
+            
+            //Show all the data before moving to next view controller
+            
             //TODO: edit the row at indexPath here
             self.selectedIndex = indexPath.row
             self.performSegue(withIdentifier: String(describing:NoteDetailsViewController.self), sender: true)
@@ -143,10 +149,7 @@ extension ToDoListViewController:UITableViewDataSource, UITableViewDelegate{
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
             //TODO: Delete the row at indexPath here
             self.deleteData(atIndex: indexPath.row)
-            
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.endUpdates()
+            self.deleteRow(atIndex: indexPath.row)
         }
         deleteAction.backgroundColor = .red
         
@@ -167,6 +170,12 @@ extension ToDoListViewController:UITableViewDataSource, UITableViewDelegate{
         self.todoTableView.beginUpdates()
         self.todoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         self.todoTableView.endUpdates()
+    }
+    
+    func reloadData() {
+        self.fetchData()
+        self.searchBar.text = ""
+        self.todoTableView.reloadData()
     }
 }
 
